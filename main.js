@@ -10,6 +10,7 @@ const merchantsNavButton = document.querySelector("#merchants-nav")
 const itemsNavButton = document.querySelector("#items-nav")
 const addNewButton = document.querySelector("#add-new-button")
 const showingText = document.querySelector("#showing-text")
+const viewCouponButton = document.querySelector(".view-merchant-coupons")
 
 //Form elements
 const merchantForm = document.querySelector("#new-merchant-form")
@@ -32,6 +33,10 @@ addNewButton.addEventListener('click', () => {
 submitMerchantButton.addEventListener('click', (event) => {
   submitMerchant(event)
 })
+
+// viewCouponButton.addEventListener('click', () => {
+//   console.log('hey does this work')
+// })
 
 //Global variables
 let merchants;
@@ -235,21 +240,41 @@ function displayMerchantItems(event) {
 function getMerchantCoupons(event) {
   let merchantId = event.target.closest("article").id.split('-')[1]
   console.log("Merchant ID:", merchantId)
-
-  fetchData(`merchants/${merchantId}`)
+  // let couponDataCollection = []
+  fetchData(`merchants/${merchantId}/coupons`)
   .then(couponData => {
     console.log("Coupon data from fetch:", couponData)
+    console.log("Coupon data from fetch:", couponData.data)
+    console.log("Coupon data from fetch:", couponData.data[0].attributes)
+    // couponDataCollection.push(couponData)
     displayMerchantCoupons(couponData);
   })
+  // return couponDataCollection
 }
 
-function displayMerchantCoupons(coupons) {
+function displayMerchantCoupons(couponData) {
+  console.log('coupon data:', couponData)
+  let coupons = couponData.data
   show([couponsView])
   hide([merchantsView, itemsView])
-
-  couponsView.innerHTML = `
-    <p>Coupon data will go here.</p>
-  `
+  let couponDiv = document.createElement('div')
+  couponDiv.innerHTML = ''
+  // let coupView = document.getElementById("coupons-view")
+  // coupView.innerHTML = '';
+  
+  coupons.forEach((coupon) => {
+    couponDiv.innerHTML += `
+    <article class="coupon" id="coupon-${coupon.id}>
+      <p>${coupon.attributes.name}</p>
+      <p>${coupon.attributes.code}</p>
+      <p>${coupon.attributes.discount_type}</p>
+      <p>${coupon.attributes.value}</p>
+      <p>${coupon.attributes.active}</p>
+    </article>
+    `
+  })
+  console.log(couponDiv.innerHTML)
+  couponsView.appendChild(couponDiv);
 }
 
 //Helper Functions
