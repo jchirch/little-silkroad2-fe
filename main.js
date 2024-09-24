@@ -10,6 +10,7 @@ const merchantsNavButton = document.querySelector("#merchants-nav")
 const itemsNavButton = document.querySelector("#items-nav")
 const addNewButton = document.querySelector("#add-new-button")
 const showingText = document.querySelector("#showing-text")
+const viewCouponButton = document.querySelector("#view-merchant-coupons")
 
 //Form elements
 const merchantForm = document.querySelector("#new-merchant-form")
@@ -32,6 +33,10 @@ addNewButton.addEventListener('click', () => {
 submitMerchantButton.addEventListener('click', (event) => {
   submitMerchant(event)
 })
+
+// viewCouponButton.addEventListener('click', () => {
+//   console.log('hey does this work')
+// })
 
 //Global variables
 let merchants;
@@ -235,21 +240,32 @@ function displayMerchantItems(event) {
 function getMerchantCoupons(event) {
   let merchantId = event.target.closest("article").id.split('-')[1]
   console.log("Merchant ID:", merchantId)
-
-  fetchData(`merchants/${merchantId}`)
+  fetchData(`merchants/${merchantId}/coupons`)
   .then(couponData => {
-    console.log("Coupon data from fetch:", couponData)
     displayMerchantCoupons(couponData);
   })
 }
 
-function displayMerchantCoupons(coupons) {
+function displayMerchantCoupons(couponData) {
+  console.log('coupon data:', couponData)
+  let coupons = couponData.data
   show([couponsView])
   hide([merchantsView, itemsView])
-
-  couponsView.innerHTML = `
-    <p>Coupon data will go here.</p>
-  `
+  
+  couponsView.innerHTML = ''
+  
+  coupons.forEach((coupon) => {
+    console.log(coupon.attributes.name)
+    couponsView.innerHTML += `
+    <article class="coupon" id="coupon-${coupon.id}">
+      <h2>${coupon.attributes.name}</h4>
+      <p>Code: ${coupon.attributes.code}</p>
+      <p>Type: ${coupon.attributes.discount_type}</p>
+      <p>Value: ${coupon.attributes.value}</p>
+      <p>Active?: ${coupon.attributes.active}</p>
+    </article>
+    `
+  })
 }
 
 //Helper Functions

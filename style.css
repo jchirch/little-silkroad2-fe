@@ -131,8 +131,9 @@ h3 {
   color: var(--blue);
 }
 
-/* MERCHANT + ITEM CARDS */
-.merchant, .item {
+
+/* MERCHANT + ITEM CARDS + COUPON LAND */
+.merchant, .item, .coupon {
   align-items: center;
   background-color: #fff;
   border-radius: 8px;
@@ -144,10 +145,31 @@ h3 {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.coupon:hover,
 .merchant:hover,
 .item:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   transform: translateY(-5px);
+}
+
+#coupons-view {
+  display: flex;
+  gap: 2%;
+  flex-wrap: wrap;
+}
+
+.coupon {
+  flex-direction: column;
+  padding: 10px;
+  flex-wrap: wrap;
+  text-align: center;
+  width: 30%;
+  padding: 5%;
+}
+
+.coupon p,
+.coupon h2 {
+  margin: 5px;
 }
 
 .items-view {
@@ -155,6 +177,7 @@ h3 {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
 
 .item {
   flex-direction: column;
