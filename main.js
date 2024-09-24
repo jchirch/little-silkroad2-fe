@@ -240,16 +240,10 @@ function displayMerchantItems(event) {
 function getMerchantCoupons(event) {
   let merchantId = event.target.closest("article").id.split('-')[1]
   console.log("Merchant ID:", merchantId)
-  // let couponDataCollection = []
   fetchData(`merchants/${merchantId}/coupons`)
   .then(couponData => {
-    console.log("Coupon data from fetch:", couponData)
-    console.log("Coupon data from fetch:", couponData.data)
-    console.log("Coupon data from fetch:", couponData.data[0].attributes)
-    // couponDataCollection.push(couponData)
     displayMerchantCoupons(couponData);
   })
-  // return couponDataCollection
 }
 
 function displayMerchantCoupons(couponData) {
