@@ -156,6 +156,7 @@ h3 {
   display: flex;
   gap: 2%;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .coupon {
@@ -164,6 +165,7 @@ h3 {
   flex-wrap: wrap;
   text-align: center;
   width: 30%;
+  min-width: 150px;
   padding: 5%;
 }
 
