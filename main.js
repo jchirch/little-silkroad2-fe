@@ -242,6 +242,7 @@ function getMerchantCoupons(event) {
   console.log("Merchant ID:", merchantId)
   fetchData(`merchants/${merchantId}/coupons`)
   .then(couponData => {
+    hide([addNewButton])
     displayMerchantCoupons(couponData);
   })
 }
