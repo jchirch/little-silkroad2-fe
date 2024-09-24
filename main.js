@@ -10,7 +10,7 @@ const merchantsNavButton = document.querySelector("#merchants-nav")
 const itemsNavButton = document.querySelector("#items-nav")
 const addNewButton = document.querySelector("#add-new-button")
 const showingText = document.querySelector("#showing-text")
-const viewCouponButton = document.querySelector(".view-merchant-coupons")
+const viewCouponButton = document.querySelector("#view-merchant-coupons")
 
 //Form elements
 const merchantForm = document.querySelector("#new-merchant-form")
@@ -258,13 +258,12 @@ function displayMerchantCoupons(couponData) {
   show([couponsView])
   hide([merchantsView, itemsView])
   let couponDiv = document.createElement('div')
-  couponDiv.innerHTML = ''
-  // let coupView = document.getElementById("coupons-view")
-  // coupView.innerHTML = '';
+  couponsView.innerHTML = ''
   
   coupons.forEach((coupon) => {
-    couponDiv.innerHTML += `
-    <article class="coupon" id="coupon-${coupon.id}>
+    console.log(coupon.attributes.name)
+    couponsView.innerHTML += `
+    <article class="coupon" id="coupon-${coupon.id}">
       <p>${coupon.attributes.name}</p>
       <p>${coupon.attributes.code}</p>
       <p>${coupon.attributes.discount_type}</p>
@@ -274,7 +273,7 @@ function displayMerchantCoupons(couponData) {
     `
   })
   console.log(couponDiv.innerHTML)
-  couponsView.appendChild(couponDiv);
+ 
 }
 
 //Helper Functions
