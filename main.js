@@ -257,23 +257,21 @@ function displayMerchantCoupons(couponData) {
   let coupons = couponData.data
   show([couponsView])
   hide([merchantsView, itemsView])
-  let couponDiv = document.createElement('div')
+  
   couponsView.innerHTML = ''
   
   coupons.forEach((coupon) => {
     console.log(coupon.attributes.name)
     couponsView.innerHTML += `
     <article class="coupon" id="coupon-${coupon.id}">
-      <p>${coupon.attributes.name}</p>
-      <p>${coupon.attributes.code}</p>
-      <p>${coupon.attributes.discount_type}</p>
-      <p>${coupon.attributes.value}</p>
-      <p>${coupon.attributes.active}</p>
+      <h2>${coupon.attributes.name}</h4>
+      <p>Code: ${coupon.attributes.code}</p>
+      <p>Type: ${coupon.attributes.discount_type}</p>
+      <p>Value: ${coupon.attributes.value}</p>
+      <p>Active?: ${coupon.attributes.active}</p>
     </article>
     `
   })
-  console.log(couponDiv.innerHTML)
- 
 }
 
 //Helper Functions
