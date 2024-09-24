@@ -242,7 +242,10 @@ function getMerchantCoupons(event) {
   console.log("Merchant ID:", merchantId)
   fetchData(`merchants/${merchantId}/coupons`)
   .then(couponData => {
+    console.log('merchant id in then', merchantId)
+    hide([addNewButton])
     displayMerchantCoupons(couponData);
+    showingText.innerText = `All Coupons for Merchant #${merchantId}`
   })
 }
 
@@ -262,13 +265,16 @@ function displayMerchantCoupons(couponData) {
       <p>Code: ${coupon.attributes.code}</p>
       <p>Type: ${coupon.attributes.discount_type}</p>
       <p>Value: ${coupon.attributes.value}</p>
-      <p>Active?: ${coupon.attributes.active}</p>
+      <p>Active? ${coupon.attributes.active}</p>
     </article>
     `
   })
 }
 
 //Helper Functions
+
+
+
 function show(elements) {
   elements.forEach(element => {
     element.classList.remove('hidden')
